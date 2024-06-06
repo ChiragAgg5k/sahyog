@@ -1,27 +1,32 @@
-import "@/styles/globals.css"
-import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
+import "@/styles/globals.css";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
 import React from "react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
-export default function RootLayout({ children }:{
-    children: React.ReactNode
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
 }) {
   return (
+    <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
+        <head />
+        <body
           className={cn(
-              "min-h-screen bg-background font-sans antialiased",
-              fontSans.variable
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable,
           )}
-      >
-        {children}
-      </body>
+        >
+          {children}
+        </body>
       </html>
-  )
+    </ClerkProvider>
+  );
 }
