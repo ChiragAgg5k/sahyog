@@ -7,18 +7,18 @@ export default async function HomePage() {
   // -H "Accept: application/json" \
   // -H "Content-Type: application/json" \
   // -d '{"principal":"User::\"writer@blog.app\"","action":"Action::\"post\"","resource":"Resource::\"article\""}'
-  await fetch("http://localhost:8180/v1/is_authorized", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      principal: 'User::"writer@blog.app"',
-      action: 'Action::"post"',
-      resource: 'Resource::"article"',
-    }),
-  }).then((res) => res.json());
+  // await fetch("http://localhost:8180/v1/is_authorized", {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     principal: 'User::"writer@blog.app"',
+  //     action: 'Action::"post"',
+  //     resource: 'Resource::"article"',
+  //   }),
+  // }).then((res) => res.json());
   return (
     <main>
       <div
