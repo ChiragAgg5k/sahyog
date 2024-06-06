@@ -7,8 +7,7 @@ export default async function HomePage() {
   // -H "Accept: application/json" \
   // -H "Content-Type: application/json" \
   // -d '{"principal":"User::\"writer@blog.app\"","action":"Action::\"post\"","resource":"Resource::\"article\""}'
-
-  const data = await fetch("http://localhost:8180/v1/is_authorized", {
+  await fetch("http://localhost:8180/v1/is_authorized", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -20,7 +19,6 @@ export default async function HomePage() {
       resource: 'Resource::"article"',
     }),
   }).then((res) => res.json());
-
   return (
     <main>
       <div
