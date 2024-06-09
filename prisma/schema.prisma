@@ -11,8 +11,10 @@ datasource db {
 }
 
 model Room {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  ownerId      String
+  allowedUsers String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

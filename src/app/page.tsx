@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SignedOut, SignInButton } from "@clerk/nextjs";
+import { CreateRoomDialog } from "@/components/create-room-dialog";
+import { clerkClient } from "@clerk/nextjs/server";
+import { db } from "@/server/db";
 
 export default async function HomePage() {
   //  curl -X POST "http://localhost:8180/v1/is_authorized" \
@@ -19,6 +22,9 @@ export default async function HomePage() {
   //     resource: 'Resource::"article"',
   //   }),
   // }).then((res) => res.json());
+
+  const rooms = await db.room.findMany();
+
   return (
     <main>
       <div
@@ -41,9 +47,13 @@ export default async function HomePage() {
             <Button variant={`outline`}>Learn More</Button>
           </Link>
           <SignedOut>
-            <Button>
+            <div
+              className={
+                "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
+              }
+            >
               <SignInButton mode={`modal`} />
-            </Button>
+            </div>
           </SignedOut>
         </div>
       </div>
@@ -62,12 +72,16 @@ export default async function HomePage() {
               ask for permission or create your own room.
             </p>
           </div>
-          <Button>Create Room</Button>
+          <CreateRoomDialog />
         </div>
         <div className={"flex h-[50vh] items-center justify-center"}>
-          <p className={`font-light`}>
-            No room available. Create a room to get started.
-          </p>
+          {rooms.length > 0 ? (
+            <p>{JSON.stringify(rooms, null, 2)}</p>
+          ) : (
+            <p className={`font-light`}>
+              No room available. Create a room to get started.
+            </p>
+          )}
         </div>
       </div>
     </main>
