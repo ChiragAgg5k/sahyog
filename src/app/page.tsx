@@ -1,6 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { SignedOut, SignInButton } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+} from "@clerk/nextjs";
 import { CreateRoomDialog } from "@/components/create-room-dialog";
 import { clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
@@ -10,18 +15,21 @@ export default async function HomePage() {
   // -H "Accept: application/json" \
   // -H "Content-Type: application/json" \
   // -d '{"principal":"User::\"writer@blog.app\"","action":"Action::\"post\"","resource":"Resource::\"article\""}'
-  // await fetch("http://localhost:8180/v1/is_authorized", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     principal: 'User::"writer@blog.app"',
-  //     action: 'Action::"post"',
-  //     resource: 'Resource::"article"',
-  //   }),
-  // }).then((res) => res.json());
+  await fetch("http://localhost:8180/v1/is_authorized", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      principal: 'User::"writer@blog.app"',
+      action: 'Action::"post"',
+      resource: 'Resource::"article"',
+    }),
+  }).then(async (res) => {
+    const data = await res.json();
+    console.log(data);
+  });
 
   const rooms = await db.room.findMany();
 
@@ -55,6 +63,15 @@ export default async function HomePage() {
               <SignInButton mode={`modal`} />
             </div>
           </SignedOut>
+          <SignedIn>
+            <div
+              className={
+                "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
+              }
+            >
+              <SignOutButton />
+            </div>
+          </SignedIn>
         </div>
       </div>
       <div className={"flex min-h-[75vh] flex-col p-8"}>
@@ -74,15 +91,35 @@ export default async function HomePage() {
           </div>
           <CreateRoomDialog />
         </div>
-        <div className={"flex h-[50vh] items-center justify-center"}>
-          {rooms.length > 0 ? (
-            <p>{JSON.stringify(rooms, null, 2)}</p>
-          ) : (
-            <p className={`font-light`}>
-              No room available. Create a room to get started.
-            </p>
-          )}
-        </div>
+        {rooms.length > 0 ? (
+          <div className={`mt-8 grid grid-cols-3 gap-4`}>
+            {rooms.map((room) => (
+              <div
+                key={room.id}
+                className={`flex items-center justify-between rounded-xl border p-4`}
+              >
+                <div>
+                  <h3 className={`text-md font-semibold`}>{room.name}</h3>
+                  <p className={`text-sm text-muted-foreground`}>
+                    Created by{" "}
+                    <span className={`font-semibold`}>
+                      {clerkClient.users
+                        .getUser(room.ownerId)
+                        .then((user) => user.fullName)}
+                    </span>
+                  </p>
+                </div>
+                <Link href={`/room/${room.id}`}>
+                  <Button variant={`outline`}>View Room</Button>
+                </Link>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className={`font-light`}>
+            No room available. Create a room to get started.
+          </p>
+        )}
       </div>
     </main>
   );
