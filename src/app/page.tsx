@@ -55,13 +55,15 @@ export default async function HomePage() {
             <Button variant={`outline`}>Learn More</Button>
           </Link>
           <SignedOut>
-            <div
-              className={
-                "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
-              }
-            >
-              <SignInButton mode={`modal`} />
-            </div>
+            <SignInButton mode={`modal`}>
+              <div
+                className={
+                  "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
+                }
+              >
+                Sign In
+              </div>
+            </SignInButton>
           </SignedOut>
           <SignedIn>
             <div
