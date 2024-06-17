@@ -31,13 +31,15 @@ You need to have the following installed on your machine:
     npm install # or pnpm install
     ```
 
-- Start your OPAL server. I like to clone the `opal-cedar`  repository and run the server from there. 
+- Start your OPAL server. Clone the forked `opal-cedar` repo from [here](https://github.com/ChiragAgg5k/sahyog-opal-cedar) and run the following commands:
     ```bash
     cd .. # go back to the parent directory
     git clone https://github.com/permitio/opal-cedar
     cd opal-cedar
     docker-compose -f docker-compose.yml up
     ```
+    
+    This repo has the updated policy for the project, so make sure to clone this repo and not the original one.
 
 - Start the development server
     ```bash

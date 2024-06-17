@@ -11,26 +11,6 @@ import { clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
 
 export default async function HomePage() {
-  //  curl -X POST "http://localhost:8180/v1/is_authorized" \
-  // -H "Accept: application/json" \
-  // -H "Content-Type: application/json" \
-  // -d '{"principal":"User::\"writer@blog.app\"","action":"Action::\"post\"","resource":"Resource::\"article\""}'
-  await fetch("http://localhost:8180/v1/is_authorized", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      principal: 'User::"writer@blog.app"',
-      action: 'Action::"post"',
-      resource: 'Resource::"article"',
-    }),
-  }).then(async (res) => {
-    const data = await res.json();
-    console.log(data);
-  });
-
   const rooms = await db.room.findMany();
 
   return (
@@ -66,13 +46,15 @@ export default async function HomePage() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <div
-              className={
-                "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
-              }
-            >
-              <SignOutButton />
-            </div>
+            <SignOutButton>
+              <div
+                className={
+                  "grid cursor-pointer place-items-center rounded-lg bg-black px-4 text-white transition-all duration-200 ease-in-out hover:opacity-85"
+                }
+              >
+                Sign Out
+              </div>
+            </SignOutButton>
           </SignedIn>
         </div>
       </div>

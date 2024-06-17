@@ -18,9 +18,37 @@ export default async function RoomPage({
   });
   const user = await currentUser();
 
+  await fetch("http://localhost:8180/v1/is_authorized", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      principal: `User::"${user?.id}"`,
+      action: 'Action::"post"',
+      resource: 'Resource::"article"',
+    }),
+  })
+    .then(async (res) => {
+      const data = (await res.json()) as {
+        decision: string;
+        diagnostics: {
+          reason: string[];
+          errors: string[];
+        };
+      };
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   if (!room) {
     return <div>Room not found</div>;
   }
+
+  const allowed = user ? room.allowedUsers.includes(user.id) : false;
 
   return (
     <main className={"p-10"}>
@@ -42,7 +70,7 @@ export default async function RoomPage({
             : "You are not logged in."}
         </span>
       </p>
-      <RoomTable />
+      <RoomTable allowedAccess={allowed} />
     </main>
   );
 }
