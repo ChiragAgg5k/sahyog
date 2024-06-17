@@ -18,6 +18,10 @@ export default async function RoomPage({
   });
   const user = await currentUser();
 
+  if (!room) {
+    return <div>Room not found</div>;
+  }
+
   await fetch("http://localhost:8180/v1/is_authorized", {
     method: "POST",
     headers: {
@@ -26,8 +30,8 @@ export default async function RoomPage({
     },
     body: JSON.stringify({
       principal: `User::"${user?.id}"`,
-      action: 'Action::"post"',
-      resource: 'Resource::"article"',
+      action: 'Action::"read"',
+      resource: `Resource::"${room.id}"`,
     }),
   })
     .then(async (res) => {
@@ -43,10 +47,6 @@ export default async function RoomPage({
     .catch((error) => {
       console.error("Error:", error);
     });
-
-  if (!room) {
-    return <div>Room not found</div>;
-  }
 
   const allowed = user ? room.allowedUsers.includes(user.id) : false;
 

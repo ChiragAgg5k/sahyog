@@ -7,6 +7,15 @@ Aim: use opal to create a very simple policy. there are rooms with one task boar
 
 ![Rooms](assets/2.png)
 
+## Demo Video
+
+<video width="320" height="240" controls>
+  <source src="assets/recording.mp4" type="video/mp4">
+  Your browser does not support the video tag
+</video>
+
+If not visible, click [here](assets/recording.mp4)
+
 ## Getting Started
 
 You need to have the following installed on your machine:
