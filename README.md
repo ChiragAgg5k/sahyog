@@ -9,12 +9,9 @@ Aim: use opal to create a very simple policy. there are rooms with one task boar
 
 ## Demo Video
 
-<video width="320" height="240" controls>
-  <source src="assets/recording.mp4" type="video/mp4">
-  Your browser does not support the video tag
-</video>
+[![Watch the video](https://github.com/ChiragAgg5k/sahyog/raw/master/assets/1.png)]([![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/vt5fpE0bzSY))
 
-If not visible, click [here](assets/recording.mp4)
+If not visible, click https://youtu.be/GgHb1drMNyw
 
 ## Getting Started
 
@@ -40,10 +37,10 @@ You need to have the following installed on your machine:
     npm install # or pnpm install
     ```
 
-- Start your OPAL server. Clone the forked `opal-cedar` repo from [here](https://github.com/ChiragAgg5k/sahyog-opal-cedar) and run the following commands:
+- Start your OPAL server. Clone the forked `sahayog-opal-cedar` repo from [here](https://github.com/ChiragAgg5k/sahyog-opal-cedar) and run the following commands:
     ```bash
     cd .. # go back to the parent directory
-    git clone https://github.com/permitio/opal-cedar
+    git clone https://github.com/ChiragAgg5k/sahyog-opal-cedar.git
     cd opal-cedar
     docker-compose -f docker-compose.yml up
     ```
