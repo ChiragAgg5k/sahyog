@@ -9,9 +9,7 @@ Aim: use opal to create a very simple policy. there are rooms with one task boar
 
 ## Demo Video
 
-[![Watch the video](https://github.com/ChiragAgg5k/sahyog/raw/master/assets/1.png)](https://youtu.be/GgHb1drMNyw)
-
-If not visible, click https://youtu.be/GgHb1drMNyw
+Check out the demo video here - https://youtu.be/GgHb1drMNyw
 
 ## Getting Started
 
