@@ -20,7 +20,7 @@ You need to have the following installed on your machine:
 
 - Clone the repository
     ```bash
-    git clone
+    git clone https://github.com/ChiragAgg5k/sahyog
     ```
   
 - Create `.env` file in the root of the project and add the following:
