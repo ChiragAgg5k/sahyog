@@ -11,7 +11,7 @@ Think of it as like a glass-walled conference room. You can see what's going on 
 
 ## Demo Video
 
-[![Watch the demo](https://raw.githubusercontent.com/ChiragAgg5k/sahyog/master/assets/1.png)](https://raw.githubusercontent.com/ChiragAgg5k/sahyog/master/assets/recording.mp4)
+https://github.com/ChiragAgg5k/sahyog/assets/110609663/62ef0258-ba84-47f9-827c-6134a3dd0dd5
 
 Or check it out on YouTube - https://youtu.be/GgHb1drMNyw
 
